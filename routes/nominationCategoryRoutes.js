@@ -13,7 +13,7 @@ const {
 // Routes
 router.get('/', getNominationCategories);
 router.get('/:id', getNominationCategoryById);
-router.post('/', addNominationCategory);
+router.post('/', upload.single('mediaUrl'), addNominationCategory);
 router.put('/:id', updateNominationCategory);
 router.delete('/:id', deleteNominationCategory);
 

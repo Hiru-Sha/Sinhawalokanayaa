@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model NominationCategory {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  mediaUrl    String?
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  nominations Nomination[]
+}
+
+model Nomination {
+  id           Int      @id @default(autoincrement())
+  fullName     String
+  age          Int
+  email        String
+  phoneNumber  String
+  achievements String?
+  documentUrl  String?
+  mediaUrl     String?
+  type         String
+  status       String   @default("active")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  categoryId Int
+  category   NominationCategory @relation(fields: [categoryId], references: [id])
+}
+
+model GalleryItem {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  mediaType   String
+  mediaUrl    String
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

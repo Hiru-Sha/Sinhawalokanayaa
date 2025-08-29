@@ -3,8 +3,6 @@ const path = require('path');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // __dirname is current folder (e.g. controllers or middleware)
-    // So resolve to project root + 'uploads'
     cb(null, path.resolve(__dirname, '../../uploads'));
   },
   filename: function (req, file, cb) {

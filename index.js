@@ -2,10 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
+//Routes
+const nominationCategoryRoutes = require('./routes/nominationCategoryRoutes');
+const nominationRoutes = require('./routes/nominationRoutes');
+const galleryItemRoutes = require('./routes/galleryItemRoutes');
+
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+
 
 app.use(cors({
   origin: '*',
@@ -16,10 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('./uploads'));
 
-//Routes
-const nominationCategoryRoutes = require('./routes/nominationCategoryRoutes');
-const nominationRoutes = require('./routes/nominationRoutes');
-const galleryItemRoutes = require('./routes/galleryItemRoutes');
+
 
 //Routes
 app.use('/api/nominationCategories', nominationCategoryRoutes);
